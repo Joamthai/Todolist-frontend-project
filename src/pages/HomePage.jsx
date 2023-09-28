@@ -5,6 +5,9 @@ import axios from 'axios';
 
 export default function HomePage() {
   const [todos, setTodos] = useState([]);
+
+  const createTodo = () => {};
+
   useEffect(() => {
     axios
       .get('http://localhost:5555/todo', {
@@ -12,12 +15,14 @@ export default function HomePage() {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       })
-      .then((res) => setTodos(res.data))
+      .then((res) => {
+        setTodos(res.data);
+      })
       .catch((err) => console.log(err));
-  });
+  }, []);
   return (
     <section className="flex flex-col gap-4">
-      <Form />
+      <Form setTodos={setTodos} createTodo={createTodo} />
       <List todos={todos} />
     </section>
   );
