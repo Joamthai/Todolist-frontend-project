@@ -26,7 +26,7 @@ export default function RegisterPage() {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    const { value, error } = schema.validate(
+    const { error } = schema.validate(
       {
         username,
         password,
@@ -41,7 +41,6 @@ export default function RegisterPage() {
         confirmPassword: '',
       };
       for (let item of error.details) {
-        console.log(error.details);
         nextError[item.path[0]] = item.message;
       }
       return setError(nextError);
@@ -56,7 +55,7 @@ export default function RegisterPage() {
         password,
         confirmPassword,
       })
-      .then((res) => {
+      .then(() => {
         window.alert('SUCCESS REGISTRATION');
         navigate('/login');
       })
@@ -84,7 +83,9 @@ export default function RegisterPage() {
         <input
           type="text"
           className={`w-full border bg-gray-100 outline-none px-3 py-1.5 rounded-md focus:ring-2 ${
-            error.username ? 'border-red-700' : 'focus:ring-gray-500'
+            error.username
+              ? 'border-red-700 focus:ring-red-500'
+              : 'focus:ring-gray-500'
           }`}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
@@ -98,9 +99,11 @@ export default function RegisterPage() {
           Password
         </label>
         <input
-          type="text"
+          type="password"
           className={`w-full border bg-gray-100 outline-none px-3 py-1.5 rounded-md focus:ring-2 ${
-            error.password ? 'border-red-700' : 'focus:ring-gray-500'
+            error.password
+              ? 'border-red-700 focus:ring-red-500'
+              : 'focus:ring-gray-500'
           }`}
           onChange={(event) => setPassword(event.target.value)}
         />
@@ -113,9 +116,11 @@ export default function RegisterPage() {
           Confirm Password
         </label>
         <input
-          type="text"
+          type="password"
           className={`w-full border bg-gray-100 outline-none px-3 py-1.5 rounded-md focus:ring-2 ${
-            error.username ? 'border-red-700' : 'focus:ring-gray-500'
+            error.username
+              ? 'border-red-700 focus:ring-red-500'
+              : 'focus:ring-gray-500'
           }`}
           value={confirmPassword}
           onChange={(event) => setConfirmPassword(event.target.value)}

@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import Authenticated from '../components/Authenticated';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,14 @@ const router = createBrowserRouter([
       </div>
     ),
     children: [
-      { path: '', element: <HomePage /> },
+      {
+        path: '',
+        element: (
+          <Authenticated>
+            <HomePage />
+          </Authenticated>
+        ),
+      },
       { path: 'login', element: <LoginPage /> },
       { path: 'register', element: <RegisterPage /> },
     ],
